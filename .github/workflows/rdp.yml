@@ -90,7 +90,7 @@ jobs:
         run: |
           Write-Host "Tailscale IP: $env:TAILSCALE_IP"
 
-          # Test connectivity using Test-NetConnection against localhost on port 3389 (simpler)
+          # Test connectivity using Test-NetConnection against localhost on port 3389 (simpler and reliable)
           $testResult = Test-NetConnection -ComputerName localhost -Port 3389
           if (-not $testResult.TcpTestSucceeded) {
               Write-Error "TCP connection to RDP port 3389 failed"
@@ -103,7 +103,7 @@ jobs:
           Write-Host "`n=== RDP ACCESS ==="
           Write-Host "Address: $env:TAILSCALE_IP"
           Write-Host "Username: RDP"
-          Write-Host "Password: $(echo $env:RDP_CREDS)"
+          Write-Host "Password: $env:RDP_CREDS"
           Write-Host "==================`n"
 
           # Keep runner active indefinitely (or until manually cancelled)
